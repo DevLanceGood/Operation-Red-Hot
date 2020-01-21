@@ -1,0 +1,16 @@
+Z:\Documents\Learning\C#\Downloads\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+Z:\Documents\Learning\C#\Downloads\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+Z:\Documents\Learning\C#\Downloads\SpaceInvaders\obj\Debug\SpaceInvaders.csprojAssemblyReference.cache
+Z:\Documents\Learning\C#\Downloads\SpaceInvaders\obj\Debug\SpaceInvaders.Form1.resources
+Z:\Documents\Learning\C#\Downloads\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.GenerateResource.cache
+Z:\Documents\Learning\C#\Downloads\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+Z:\Documents\Learning\C#\Downloads\SpaceInvaders\obj\Debug\SpaceInvaders.exe
+Z:\Documents\Learning\C#\Downloads\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
+C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug\SpaceInvaders.csprojAssemblyReference.cache
+C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug\SpaceInvaders.Form1.resources
+C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.GenerateResource.cache
+C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug\SpaceInvaders.exe
+C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
