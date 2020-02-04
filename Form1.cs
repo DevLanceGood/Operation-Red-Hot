@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Timers;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
@@ -29,9 +27,8 @@ namespace SpaceInvaders
 		private const int kNumberOfShields = 4;
 
 		private long TimerCounter = 0;
-        //private long pauseTimerCounter = 0;
-
-        private int TheSpeed = 6;
+        
+		private int TheSpeed = 6;
 
 		private int TheLevel = 0;
 
@@ -48,23 +45,8 @@ namespace SpaceInvaders
 		private InvaderRow[] InvaderRows = new InvaderRow[6];
 		private Shield[] Shields = new Shield[4];
 		private InvaderRow TheInvaders = null;
-        private Profile profile = null;
-        private bool _pause = false;
-        private bool pause
-        {
-            get { return _pause; }
-            set
-            {
-                _pause = value;
-                for (int i = 0; i < InvaderRows.Length - 1; i++)
-                {
-                    InvaderRow row = InvaderRows[i];
-                    row.setPause(value);
-                }
-            }
-        }
 
-        private int kSaucerInterval = 400;
+		private int kSaucerInterval = 400;
 
 		private string CurrentKeyDown = "";
 		private string LastKeyDown = "";
@@ -72,24 +54,20 @@ namespace SpaceInvaders
 		private System.Windows.Forms.MenuItem menuItem1;
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem menuItem3;
-        private Label label1;
-        private Thread oThread = null;
+
+		private Thread oThread = null;
 
 		[DllImport("winmm.dll")]
 		public static extern long PlaySound(String lpszName, long hModule, long dwFlags);
 
-        string[] speeds;
 
-		public Form1(string[] array, Profile profile)
+		public Form1()
 		{
-            this.profile = profile;
 			//
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
-            // reduce flicker
-
-            speeds = array;
+			// reduce flicker
 
 			SetStyle(ControlStyles.UserPaint, true);
 			SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -132,7 +110,6 @@ namespace SpaceInvaders
 		private void InitializeMan()
 		{
 			TheMan = new Man();
-            TheMan.setKInterval(speeds[1]);
 			TheMan.Position.Y = ClientRectangle.Bottom - 50;
 			NumberOfMen = 3;
 		}
@@ -141,7 +118,7 @@ namespace SpaceInvaders
 		{
 			TheScore = new Score(ClientRectangle.Right - 400, 50);
 			TheHighScore = new HighScore(ClientRectangle.Left + 25, 50);
-			TheHighScore.Read();
+			TheHighScore.ReadOne();
 		}
 
 		private void InitializeShields()
@@ -158,11 +135,11 @@ namespace SpaceInvaders
 
 		void InitializeInvaderRows(int level)
 		{
-          InvaderRows[0] = new InvaderRow(speeds[2], "invader1.gif", "invader1c.gif", 2 + level);
-		  InvaderRows[1] = new InvaderRow(speeds[2], "invader2.gif", "invader2c.gif", 3 + level);
-		  InvaderRows[2] = new InvaderRow(speeds[2], "invader2.gif", "invader2c.gif", 4 + level);
-		  InvaderRows[3] = new InvaderRow(speeds[2], "invader3.gif", "invader3c.gif", 5 + level);
-		  InvaderRows[4] = new InvaderRow(speeds[2], "invader3.gif", "invader3c.gif", 6 + level);
+          InvaderRows[0] = new InvaderRow("invader1.gif", "invader1c.gif", 2 + level);
+		  InvaderRows[1] = new InvaderRow("invader2.gif", "invader2c.gif", 3 + level);
+		  InvaderRows[2] = new InvaderRow("invader2.gif", "invader2c.gif", 4 + level);
+		  InvaderRows[3] = new InvaderRow("invader3.gif", "invader3c.gif", 5 + level);
+		  InvaderRows[4] = new InvaderRow("invader3.gif", "invader3c.gif", 6 + level);
 		}
 
 		private string m_strCurrentSoundFile = "1.wav";
@@ -217,75 +194,57 @@ namespace SpaceInvaders
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuItem2 = new System.Windows.Forms.MenuItem();
-            this.menuItem3 = new System.Windows.Forms.MenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 50;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // mainMenu1
-            // 
-            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1});
-            // 
-            // menuItem1
-            // 
-            this.menuItem1.Index = 0;
-            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem2,
-            this.menuItem3});
-            this.menuItem1.Text = "File";
-            // 
-            // menuItem2
-            // 
-            this.menuItem2.Index = 0;
-            this.menuItem2.Text = "Restart...";
-            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
-            // 
-            // menuItem3
-            // 
-            this.menuItem3.Index = 1;
-            this.menuItem3.Text = "Exit";
-            this.menuItem3.Click += new System.EventHandler(this.Menu_Exit);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.label1.Font = new System.Drawing.Font("Showcard Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(210, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "\"R\" - Restart | \"P\" - Pause";
-            // 
-            // Form1
-            // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(672, 622);
-            this.Controls.Add(this.label1);
-            this.KeyPreview = true;
-            this.Menu = this.mainMenu1;
-            this.Name = "Form1";
-            this.Text = "Space Invaders Game";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			this.components = new System.ComponentModel.Container();
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(Form1));
+			this.timer1 = new System.Windows.Forms.Timer(this.components);
+			this.mainMenu1 = new System.Windows.Forms.MainMenu();
+			this.menuItem1 = new System.Windows.Forms.MenuItem();
+			this.menuItem2 = new System.Windows.Forms.MenuItem();
+			this.menuItem3 = new System.Windows.Forms.MenuItem();
+			// 
+			// timer1
+			// 
+			this.timer1.Interval = 50;
+			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+			// 
+			// mainMenu1
+			// 
+			this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																					  this.menuItem1});
+			// 
+			// menuItem1
+			// 
+			this.menuItem1.Index = 0;
+			this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																					  this.menuItem2,
+																					  this.menuItem3});
+			this.menuItem1.Text = "File";
+			// 
+			// menuItem2
+			// 
+			this.menuItem2.Index = 0;
+			this.menuItem2.Text = "Restart...";
+			this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
+			// 
+			// menuItem3
+			// 
+			this.menuItem3.Index = 1;
+			this.menuItem3.Text = "Exit";
+			this.menuItem3.Click += new System.EventHandler(this.Menu_Exit);
+			// 
+			// Form1
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.BackgroundImage = ((System.Drawing.Bitmap)(resources.GetObject("$this.BackgroundImage")));
+			this.ClientSize = new System.Drawing.Size(672, 622);
+			this.KeyPreview = true;
+			this.Menu = this.mainMenu1;
+			this.Name = "Form1";
+			this.Text = "Space Invaders Game";
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
+			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+			this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
 
 		}
 		#endregion
@@ -296,11 +255,8 @@ namespace SpaceInvaders
 		[STAThread]
 		static void Main() 
 		{
-			Application.Run(new titlescreen());
+			Application.Run(new Form1());
 		}
-
-        //static Timer _pauseTimer;
-
 
 		private void HandleKeys()
 		{
@@ -310,47 +266,35 @@ namespace SpaceInvaders
 					if (ActiveBullet == false)
 					{
 						TheBullet.Position = TheMan.GetBulletStart();
-                        TheBullet.setKInterval(speeds[0]);
 						ActiveBullet = true;
 						PlaySoundInThread("1.wav", 2);
 					}
 					CurrentKeyDown = LastKeyDown;
 					break;
-                case "A":
-                    TheMan.MoveLeft();
-                    TheMan.setPause(pause);
-                    Invalidate(TheMan.GetBounds());
-                    if (timer1.Enabled == false)
-                        timer1.Start();
-                    break;
-                case "D":
-                    TheMan.MoveRight(ClientRectangle.Right);
-                    TheMan.setPause(pause);
-                    Invalidate(TheMan.GetBounds());
-                    if (timer1.Enabled == false)
-                        timer1.Start();
-                    break;
-                case "R":
-                    InitializeAllGameObjects(true);
-                    TimerCounter = 0;
-                    CurrentSaucer.Reset();
-                    SaucerStart = false;
-                    break;
-                /*
-                case "P":
-                    pause = !pause;
-                    break;
-                    */
-                default:
-                    break;
-            }
+				case "Left":
+					TheMan.MoveLeft();
+					Invalidate(TheMan.GetBounds());
+					if (timer1.Enabled == false)
+						timer1.Start();
+					break;
+				case "Right":
+					TheMan.MoveRight(ClientRectangle.Right);
+					Invalidate(TheMan.GetBounds());
+					if (timer1.Enabled == false)
+						timer1.Start();
+					break;
+				default:
+					break;
+			}
+
+
 		}
 
 		private void Form1_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{  
 			string result = e.KeyData.ToString();
 			CurrentKeyDown = result;
-			if (result == "A"  || result == "D")
+			if (result == "Left"  || result == "Right")
 			{
 			  LastKeyDown = result;
 			}
@@ -572,7 +516,8 @@ namespace SpaceInvaders
 					TheMan.BeenHit = true;
 					PlaySoundInThread("2.wav", 1);
 					TheScore.GameOver = true;
-					TheHighScore.Write(TheScore.Count);
+                    string name = ShowDialog("Name", "Enter your name.");
+					TheHighScore.Write(name, TheScore.Count);
 					GameGoing = false;
 				}
 			}
@@ -588,14 +533,37 @@ namespace SpaceInvaders
 			}
 		}
 
+        public static string ShowDialog(string text, string caption)
+        {
+            Form prompt = new Form()
+            {
+                Width = 500,
+                Height = 150,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label textLabel = new Label() { Left = 50, Top=20, Text=text };
+            TextBox textBox = new TextBox() { Left = 50, Top=50, Width=400 };
+            Button confirmation = new Button() { Text = "Ok", Left=350, Width=100, Top=70, DialogResult = DialogResult.OK };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(textBox);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+
+            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
+        }
+
 		void TestBombCollision()
 		{
 			if (TheMan.Died)
 			{
-			  NumberOfMen --;
+			    NumberOfMen--;
 				if (NumberOfMen == 0)
 				{
-					TheHighScore.Write(TheScore.Count);
+                    string name = ShowDialog("Name", "Enter your name.");
+					TheHighScore.Write(name, TheScore.Count);
 					TheScore.GameOver = true;
 					GameGoing = false;
 				}
@@ -645,105 +613,103 @@ namespace SpaceInvaders
 		private int nTotalInvaders = 0;
 		private void timer1_Tick(object sender, System.EventArgs e)
 		{
-            if (pause == false)
-            {
-                HandleKeys();
+			HandleKeys();
 
-                TimerCounter++;
+			TimerCounter++;
 
-                if (GameGoing == false)
-                {
-                    if (TimerCounter % 6 == 0)
-                        MoveInvadersInPlace();
-                    Invalidate();
-                    return;
-                }
+			if (GameGoing == false)
+			{
+				if (TimerCounter % 6 == 0)
+					MoveInvadersInPlace();
+				Invalidate();
+				return;
+			}
 
 
-                if (TheBullet.Position.Y < 0)
-                {
-                    ActiveBullet = false;
-                }
+			if (TheBullet.Position.Y < 0)
+			{
+			  ActiveBullet = false;
+			}
 
-                if (TimerCounter % kSaucerInterval == 0)
-                {
-                    InitializeSaucer();
-                    PlaySoundInThread("8.wav", 1);
-                    SaucerStart = true;
-                }
+			if (TimerCounter % kSaucerInterval == 0)
+			{
+				InitializeSaucer();
+				PlaySoundInThread("8.wav", 1);
+				SaucerStart = true;
+			}
 
-                if (SaucerStart == true)
-                {
-                    CurrentSaucer.Move();
-                    if (CurrentSaucer.GetBounds().Left > ClientRectangle.Right)
-                    {
-                        SaucerStart = false;
-                    }
-                }
-
-
-                if (TimerCounter % TheSpeed == 0)
-                {
-                    MoveInvaders();
-
-                    nTotalInvaders = TotalNumberOfInvaders();
-
-                    if (nTotalInvaders <= 20)
-                    {
-                        TheSpeed = 5;
-                    }
-
-                    if (nTotalInvaders <= 10)
-                    {
-                        TheSpeed = 4;
-                    }
+			if (SaucerStart == true)
+			{
+				CurrentSaucer.Move();
+				if (CurrentSaucer.GetBounds().Left > ClientRectangle.Right)
+				{
+				  SaucerStart = false;
+				}
+			}
 
 
-                    if (nTotalInvaders <= 5)
-                    {
-                        TheSpeed = 3;
-                    }
+			if (TimerCounter % TheSpeed == 0)
+			{ 
+				MoveInvaders();
 
-                    if (nTotalInvaders <= 3)
-                    {
-                        TheSpeed = 2;
-                    }
+				nTotalInvaders = TotalNumberOfInvaders();
 
-                    if (nTotalInvaders <= 1)
-                    {
-                        TheSpeed = 1;
-                    }
+				if (nTotalInvaders <= 20)
+				{
+					TheSpeed = 5;
+				}
 
-                    if (nTotalInvaders == 0)
-                    {
-                        InitializeAllGameObjects(false); // don't initialize score					
-                        TheLevel++;
-                    }
+				if (nTotalInvaders <= 10)
+				{
+					TheSpeed = 4;
+				}
 
 
-                }
+				if (nTotalInvaders <= 5)
+				{
+					TheSpeed = 3;
+				}
 
-                TestBulletCollision();
-                TestBombCollision();
+				if (nTotalInvaders <= 3)
+				{
+					TheSpeed = 2;
+				}
+
+				if (nTotalInvaders <= 1 )
+				{
+					TheSpeed = 1;
+				}
+
+				if (nTotalInvaders == 0)
+				{
+				 InitializeAllGameObjects(false); // don't initialize score					
+				 TheLevel++;
+				}
 
 
-                Invalidate();
-                // move invaders
+			}
 
-                // move bullets
-            }
-        }
+			TestBulletCollision();
+			TestBombCollision();
 
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+
+			Invalidate();
+			// move invaders
+
+			// move bullets
+		}
+
+		private void Form1_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
 		{
-            //			string result = e.KeyChar.ToString();
-            //			Invalidate(TheMan.GetBounds());
+//			string result = e.KeyChar.ToString();
+//			Invalidate(TheMan.GetBounds());
+		
 		}
 
 		private void Form1_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
 			string result = e.KeyData.ToString();
-			if (result == "A"  || result == "D")
+			if (result == "Left"  || result == "Right")
 			{
 				LastKeyDown = "";
 			}
@@ -760,19 +726,5 @@ namespace SpaceInvaders
 		{
 			Application.Exit();
 		}
-        /*
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            InitializeAllGameObjects(true);
-            TimerCounter = 0;
-            CurrentSaucer.Reset();
-            SaucerStart = false;
-        }
-
-        private void BtnPause_Click(object sender, KeyPressEventArgs e)
-        {
-            pause = !pause;
-        }
-        */
-    }
+	}
 }
