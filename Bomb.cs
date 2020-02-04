@@ -29,11 +29,6 @@ namespace SpaceInvaders
             }
         }
 
-        public void manualySetK(int speed)
-        {
-            TheBombInterval = speed;
-        }
-
         public Bomb(int x, int y)
 		{
 			ImageBounds.Width = 5;

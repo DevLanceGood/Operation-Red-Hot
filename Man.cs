@@ -31,10 +31,6 @@ namespace SpaceInvaders
             }
         }
 
-        public void manualSetK(int speed)
-        {
-            kInterval = speed;
-        }
 
         public Man(): base("man.gif")
 		{
