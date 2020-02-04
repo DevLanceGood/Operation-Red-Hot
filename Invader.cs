@@ -32,36 +32,25 @@ namespace SpaceInvaders
         private const int kInterval = 10;
         private long Counter = 0;
 
-        public Invader(string InvadorColor, string bombSpeed, string i1, string i2) : base(i1)
+        public Invader(string bombSpeed, string i1, string i2) : base(i1)
         {
 
             setBombSpeed = bombSpeed;
-
+            //
+            // TODO: Add constructor logic here
+            //
             OtherImage = Image.FromFile(i2);
             Color color = Color.Black;
+            byte r = color.R;
             Bitmap bmp = new Bitmap(OtherImage);
             Bitmap bmp2 = new Bitmap(TheImage);
-            InvadorColor = InvadorColor.ToLower();
 
             for (int x = 0; x < bmp.Width; x++)
             {
                 for (int y = 0; y < bmp.Height; y++)
                 {
                     Color gotcolor = bmp.GetPixel(x, y);
-
-                    if (InvadorColor == "red")
-                    {
-                        gotcolor = Color.FromArgb(gotcolor.R, 0, 0);
-                    }
-                    else if (InvadorColor == "blue")
-                    {
-                        gotcolor = Color.FromArgb(0, 0, gotcolor.B);
-                    }
-                    else if (InvadorColor == "green")
-                    {
-                        gotcolor = Color.FromArgb(0, gotcolor.G, 0);
-                    }
-
+                    gotcolor = Color.FromArgb(r, gotcolor.G, gotcolor.B);
                     bmp.SetPixel(x, y, gotcolor);
                 }
             }
@@ -70,20 +59,7 @@ namespace SpaceInvaders
                 for (int y = 0; y < bmp2.Height; y++)
                 {
                     Color gotcolor = bmp2.GetPixel(x, y);
-
-                    if (InvadorColor == "red")
-                    {
-                        gotcolor = Color.FromArgb(gotcolor.R, 0, 0);
-                    }
-                    else if (InvadorColor == "blue")
-                    {
-                        gotcolor = Color.FromArgb(0, 0, gotcolor.B);
-                    }
-                    else if (InvadorColor == "green")
-                    {
-                        gotcolor = Color.FromArgb(0, gotcolor.G, 0);
-                    }
-
+                    gotcolor = Color.FromArgb(r, gotcolor.G, gotcolor.B);
                     bmp2.SetPixel(x, y, gotcolor);
                 }
             }
@@ -91,6 +67,7 @@ namespace SpaceInvaders
             OtherImage = bmp;
 
             TheImage = bmp2;
+
 
             RandomNumber = new Random(rseed);
 

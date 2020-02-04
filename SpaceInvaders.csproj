@@ -86,6 +86,7 @@
     <Compile Include="Bullet.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Numbers.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +105,8 @@
     <Compile Include="Man.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Profile.cs" />
+    <Compile Include="ProfileHandler.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
