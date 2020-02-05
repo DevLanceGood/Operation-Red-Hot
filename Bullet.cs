@@ -10,9 +10,26 @@ namespace SpaceInvaders
 	public class Bullet : GameObject
 	{
 		const int kBulletInterval = 20;
-		public int BulletInterval = kBulletInterval;
-		
-		public Bullet(int x, int y)
+        public int BulletInterval = kBulletInterval;
+
+        public void setKInterval(string speed)
+        {
+            speed = speed.ToLower();
+            if (speed == null || speed == "slow" || speed == "")
+            {
+                BulletInterval = 20;
+            }
+            else if (speed == "medium")
+            {
+                BulletInterval = 30;
+            }
+            else if (speed == "fast")
+            {
+                BulletInterval = 40;
+            }
+        }
+
+        public Bullet(int x, int y)
 		{
 			ImageBounds.Width = 5;
 			ImageBounds.Height = 15;
@@ -31,17 +48,19 @@ namespace SpaceInvaders
 			BulletInterval = kBulletInterval;
 		}
 
+        /*
 		public void Slow()
 		{
 //		  BulletInterval = 3;
 		}
+        */
 
 
 		public override void Draw(Graphics g)
 		{
 			UpdateBounds();
 			g.FillRectangle(Brushes.Chartreuse , MovingBounds);
-			Position.Y -= BulletInterval;
+			Position.Y -= BulletInterval / 2; // Yeah we dont need sanic
 		}
 
 	}

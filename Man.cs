@@ -11,9 +11,28 @@ namespace SpaceInvaders
 	{
 
 		private int kInterval = 5;
-		public bool Died = false;
+        private bool pause = false;
+        public bool Died = false;
 
-		public Man(): base("man.gif")
+        public void setKInterval(string speed)
+        {
+            speed = speed.ToLower();
+            if(speed == null || speed == "slow" || speed == "")
+            {
+                kInterval = 5;
+            }
+            else if(speed == "medium")
+            {
+                kInterval = 10;
+            }
+            else if(speed == "fast")
+            {
+                kInterval = 15;
+            }
+        }
+
+
+        public Man(): base("man.gif")
 		{
 			Position.X = 200;
 			Position.Y = 400;
@@ -49,9 +68,12 @@ namespace SpaceInvaders
 
 		public bool BeenHit = false;
 
+        public void setPause(bool pause)
+        {
+            this.pause = pause;
+        }
 
-
-		public void MoveLeft()
+        public void MoveLeft()
 		{
 			Position.X -= kInterval;
 			if (Position.X < 0)

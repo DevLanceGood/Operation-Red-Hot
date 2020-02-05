@@ -14,3 +14,23 @@ C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug
 C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
 C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug\SpaceInvaders.exe
 C:\Users\Paul\Doc2\Work\Teaching\Freshman Exploratory\C#\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\obj\Debug\SpaceInvaders.csprojAssemblyReference.cache
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\obj\Debug\SpaceInvaders.Form1.resources
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.GenerateResource.cache
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\obj\Debug\SpaceInvaders.exe
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\obj\Debug\SpaceInvaders.Properties.Resources.resources
+C:\Users\ctrombino2020\Desktop\SpaceInvaders\obj\Debug\SpaceInvaders.titlescreen.resources
+C:\Users\Lance Good\Desktop\Release1.3\bin\Debug\SpaceInvaders.exe
+C:\Users\Lance Good\Desktop\Release1.3\bin\Debug\SpaceInvaders.pdb
+C:\Users\Lance Good\Desktop\Release1.3\obj\Debug\SpaceInvaders.csprojAssemblyReference.cache
+C:\Users\Lance Good\Desktop\Release1.3\obj\Debug\SpaceInvaders.Form1.resources
+C:\Users\Lance Good\Desktop\Release1.3\obj\Debug\SpaceInvaders.Properties.Resources.resources
+C:\Users\Lance Good\Desktop\Release1.3\obj\Debug\SpaceInvaders.titlescreen.resources
+C:\Users\Lance Good\Desktop\Release1.3\obj\Debug\SpaceInvaders.csproj.GenerateResource.cache
+C:\Users\Lance Good\Desktop\Release1.3\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+C:\Users\Lance Good\Desktop\Release1.3\obj\Debug\SpaceInvaders.exe
+C:\Users\Lance Good\Desktop\Release1.3\obj\Debug\SpaceInvaders.pdb
